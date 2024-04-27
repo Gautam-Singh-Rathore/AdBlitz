@@ -16,7 +16,6 @@ This is a sample e-commerce website built using React and Tailwind CSS. It serve
 - **Tailwind CSS**: A utility-first CSS framework for quickly building custom designs.
 - **React Router**: For client-side routing to navigate between different pages of the website.
 - **Redux**: For managing application state, especially for features like the shopping cart.
-- **Axios**: For making HTTP requests to fetch data from a backend API.
 
 ## Contributing
 
