@@ -31,15 +31,41 @@ const UserProvider = ({ children }) => {
         console.log(error);
     }
   }
+  // get all cart products
+  const [cart , setCart ] = useState([]);
+  const getCartProduct = async()=>{
+    try {
+        const q = query(
+            collection(fireDB , 'cart'),
+            orderBy('time')
+        );
+
+        const data = onSnapshot(q , (QuerySnapshot)=>{
+            let productArray = [];
+            QuerySnapshot.forEach((doc)=>{
+                productArray.push({...doc.data(),id:doc.id});
+            });
+            setCart(productArray);
+        })
+        return data;  
+    } catch (error) {
+        console.log(error);
+    }
+  }
 
   useEffect(()=>{
     getAllProduct();
+    getCartProduct();
     console.log(allProduct);
   },[]);
 
+  
+
+
+
   return (
     <UserContext.Provider
-      value={{ isLoggedIn, setIsLoggedIn,   allProduct , getAllProduct , location , setLocation}}
+      value={{ isLoggedIn, setIsLoggedIn, getCartProduct,  allProduct , getAllProduct , location , setLocation , cart  }}
     >
       {children};
     </UserContext.Provider>

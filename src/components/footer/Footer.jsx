@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import logo from "../../assets/Logo.png";
 
 const Footer = () => {
+
+  const navigate = useNavigate();
+
   return (
     <>
     <footer className="bg-slate-900 text-white flex justify-between p-2 md:p-3 lg:p-5 px-16 lg:px-52 md:px-36  ">
@@ -12,13 +16,11 @@ const Footer = () => {
       <div className="flex gap-5 text-[6px] md:text-[10px] lg:text-[14px]">
         <div>
           <p className="font-bold">Get to Know Us</p>
-          <p>About Us</p>
+          <p className="cursor-pointer" onClick={()=>navigate('/about')}>About Us</p>
         </div>
         <div>
           <p className="font-bold">Connect With Us</p>
-          <p>Facebook</p>
-          <p>Twitter</p>
-          <p>Instagram</p>
+          <p className="cursor-pointer" onClick={()=>navigate('/team')}>Our Team</p>
         </div>
       </div>
     </footer>

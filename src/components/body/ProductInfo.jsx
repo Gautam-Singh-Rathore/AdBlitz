@@ -1,13 +1,15 @@
-import { doc, getDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { fireDB } from "../../Firebase/config";
 import { UserContext } from "../../Contexts/userContext";
+import toast from "react-hot-toast";
 
 const ProductInfo = () => {
+  const [inCart , setInCart] = useState(false);
   const [product, setProduct] = useState({});
   const { id } = useParams();
-  const { isLoggedIn } = useContext(UserContext);
+  const { isLoggedIn , cart } = useContext(UserContext);
   const [ownerDetails, setOwnerDetails] = useState(false);
   const navigate = useNavigate();
   // Get product data
@@ -20,13 +22,31 @@ const ProductInfo = () => {
     }
   };
 
+
+
   useEffect(() => {
     getProductData();
   }, []);
 
+  const addToCart = async ()=>{
+    try {
+      const productRef = collection(fireDB , "cart");
+    await addDoc(productRef , product );
+    toast.success("Product Added to Cart");
+    setInCart(true);
+    } catch (error) {
+      console.log(error);
+      toast.error("Product not added to Cart");
+    }
+    
+  }
+
   // Add to Cart function
   const handleCart = () => {
-    isLoggedIn ? console.log("abc") : navigate("/login");
+    isLoggedIn 
+    ? 
+     addToCart()  
+    : navigate("/login");
   };
 
   //See owner details function
@@ -36,7 +56,7 @@ const ProductInfo = () => {
 
   return (
     <>
-      <div className="max-w-6xl px-4 mx-auto">
+      <div className="max-w-6xl px-4 mx-auto my-3 lg:my-5">
         <div className="flex flex-wrap mb-24 -mx-4">
           <div className="w-full px-4 mb-8 md:w-1/2 md:mb-0">
             <div className="">
@@ -68,8 +88,22 @@ const ProductInfo = () => {
               </div>
               <div className="mb-6 " />
               <div className="flex flex-wrap gap-2 items-center mb-6">
-                <button className="w-full px-4 py-3 text-center text-[#EAB308] bg-yellow-100 border border-[#EAB308]  hover:bg-[#EAB308] hover:text-gray-100  rounded-xl" onClick={handleCart}>Add to Cart</button>
-                <button className="w-full px-4 py-3 text-center text-[#EAB308] bg-yellow-100 border border-[#EAB308]  hover:bg-[#EAB308] hover:text-yellow-100  rounded-xl" onClick={seeOwnerDetails}>Contact the Owner</button>
+                {
+                  inCart
+                  ?
+                  <button className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none" onClick={()=> navigate('/cart')}>View Cart</button>
+                  :
+                  <button className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none" onClick={handleCart}>Add to Cart</button>
+                }
+                
+                <button className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none" onClick={seeOwnerDetails}>Owner details</button>
+                 {
+                  ownerDetails &&
+                  <div className="w-full text-sm text-gray-700 bg-gray-100 p-4 rounded">
+                    <p><span>Mobile No :</span>{product.mobile}</p>
+                    <p><span>Email id :</span>{product.email}</p>
+                  </div>
+                }
               </div>
             </div>
           </div>
@@ -78,29 +112,5 @@ const ProductInfo = () => {
     </>
   );
 };
-// <div>
-//     <div>
-//         <img src={product.productImageUrl} alt="" />
-//     </div>
-//     <div>
-//         <span>{product.title}</span>
-//         <span>₹{product.price}</span>
-//         <span>{product.city}</span>
-//         <span>Description: <span>{product.description}</span></span>
-//         <button onClick={handleCart}>Add to Cart</button>
-//         <button onClick={seeOwnerDetails}>Contact the Owner</button>
-//         {
-//             ownerDetails &&
-//             <div>
-//                 <span>
-//                     Mobile No. : {product.mobile}
-//                 </span>
-//                 <span>
-//                     Email id : {product.email}
-//                 </span>
-//             </div>
-//         }
-//     </div>
-// </div>
 
 export default ProductInfo;

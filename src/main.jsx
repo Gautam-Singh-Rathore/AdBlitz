@@ -1,23 +1,22 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-import Login from './components/header/Login.jsx'
-import Signup from './components/header/Signup.jsx'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App.jsx';
+import './index.css';
+import Login from './components/header/Login.jsx';
+import Signup from './components/header/Signup.jsx';
 import { Toaster } from 'react-hot-toast';
-
-
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import Body from './components/body/Body.jsx'
-import { UserProvider } from './Contexts/userContext.jsx'
-import Dashboard from './components/Pages/Dashboard.jsx'
-import AddProduct from './components/Pages/AddProduct.jsx'
-import UpdateProduct from './components/Pages/UpdateProduct.jsx'
-import ProductInfo from './components/body/ProductInfo.jsx'
-import CategoryPage from './components/body/CategoryPage.jsx'
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Body from './components/body/Body.jsx';
+import { UserProvider } from './Contexts/userContext.jsx';
+import Dashboard from './components/Pages/Dashboard.jsx';
+import AddProduct from './components/Pages/AddProduct.jsx';
+import UpdateProduct from './components/Pages/UpdateProduct.jsx';
+import ProductInfo from './components/body/ProductInfo.jsx';
+import CategoryPage from './components/body/CategoryPage.jsx';
+import Cart from './components/body/Cart.jsx';
+import AboutUs from './components/Pages/AboutUs.jsx';
+import Team from './components/Pages/Team.jsx';
+import SearchItem from './components/body/SearchItem.jsx';
 
 const myRouter = createBrowserRouter([
   {
@@ -38,8 +37,24 @@ const myRouter = createBrowserRouter([
         element:<ProductInfo/>
       },
       {
-        path:'/category/:name',
+        path:'/category/:categoryNo',
         element:<CategoryPage/>
+      },
+      {
+        path:'/cart' ,
+        element:<Cart/>
+      },
+      {
+        path:'/about',
+        element:<AboutUs/>
+      },
+      {
+        path:'/team',
+        element:<Team/>
+      },
+      {
+        path:'/search/:item',
+        element:<SearchItem/>
       }
     ]
   },
@@ -58,16 +73,19 @@ const myRouter = createBrowserRouter([
   {
     path:'/update-product/:id',
     element:<UpdateProduct/>
-  },
-  
+  },  
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.render(
   <React.StrictMode>
     <UserProvider>
       <RouterProvider router={myRouter}>
+        <App />
       </RouterProvider>
       <Toaster/>
     </UserProvider>    
-  </React.StrictMode>
-)
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+
+
