@@ -11,12 +11,9 @@ function Login() {
     const [password , setPassword] = useState('');
     const [error , setError ] = useState(false);
     const { isLoggedIn, setIsLoggedIn} = useContext(UserContext);
-
     const navigate = useNavigate(); 
-
-    //const {  setUserInfo , setIsLoggedIn} = useContext(UserContext);
     
-    // **Login with email function
+    // **Login with email function**
     const handleLogIn = async()=>{
         if(email === "" || password === ""){
             setError(true);
@@ -24,8 +21,6 @@ function Login() {
         try {
             const userCredential = await signInWithEmailAndPassword(auth , email , password);
             console.log(userCredential);
-            //setUserInfo(userCredential);
-            //setIsLoggedIn(true);
             try {
                 const  q = query(
                     collection(fireDB, "user"),
@@ -53,13 +48,11 @@ function Login() {
         }
     }
 
-    // **Login with Google function
+    // **Login with Google function**
     const handleGoogleLogIn = async()=>{
         try {
             const userCredential = await signInWithPopup(auth , googleProvider);
             console.log(userCredential);
-            // setUserInfo(userCredential);
-            // setIsLoggedIn(true);
             try {
                 const  q = query(
                     collection(fireDB, "user"),

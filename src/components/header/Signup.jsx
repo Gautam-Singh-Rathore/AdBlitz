@@ -9,13 +9,10 @@ import { Timestamp, addDoc, collection } from "firebase/firestore";
 function Signup() {
     const [email , setEmail] = useState('');
     const [password , setPassword] = useState('');
-        const [error , setError ] = useState(false);
-
+    const [error , setError ] = useState(false);
     const navigate = useNavigate(); 
 
-    // const {   setIsLoggedIn} = useContext(UserContext);
-
-    // Sign in with email function
+    // **Sign in with email function**
     const handleSignUp = async()=>{
         if(email === "" || password === ""){
             setError(true);
@@ -23,10 +20,6 @@ function Signup() {
         try {
             const userCredential  = await  createUserWithEmailAndPassword(auth , email , password);
             console.log(userCredential);
-            // setUserInfo(userCredential);
-            // setIsLoggedIn(true);
-
-            // create user object 
             const user = {
                 name : userCredential.user.displayName ,
                 email : userCredential.user.email , 
@@ -58,14 +51,11 @@ function Signup() {
         }
     }
 
+    // **Sign in with google function**
     const handleGoogleSignUp = async()=>{
         try {
             const userCredential = await signInWithPopup(auth , googleProvider);
             console.log(userCredential);
-            // setUserInfo(userCredential);
-            // setIsLoggedIn(true);
-
-            // create user object 
             const user = {
                 name : userCredential.user.displayName ,
                 email : userCredential.user.email , 

@@ -1,20 +1,38 @@
-import { useEffect } from "react";
-import Carousel from "./Carousel ";
-import Category from "./Category";
-import HomePageCards from "./HomePageCards";
-import Reviews from "./Reviews";
+// Body.js
+import React, { useState, useEffect } from 'react';
+import Carousel from './Carousel ';
+import Category from './Category';
+import HomePageCards from './HomePageCards';
+import Reviews from './Reviews';
+import CityPopup from './CityPopup';
 
-const Body = ()=>{
-    useEffect(()=>{
+const Body = () => {
+    const [city, setCity] = useState('');
 
-    },[]);
-    return(
-    <>
-        <Carousel/>
-        <Category/>
-        <HomePageCards/>
-        <Reviews/>
-    </>
+    useEffect(() => {
+        // Check if a city is already selected and stored in local storage
+        const storedCity = localStorage.getItem('selectedCity');
+        if (storedCity) {
+            setCity(storedCity);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (city) {
+            localStorage.setItem('selectedCity', city);
+        }
+    }, [city]);
+
+    return (
+        <>
+            {!city && <CityPopup setCity={setCity} />}
+            <Carousel />
+            <Category />
+            <HomePageCards />
+            <Reviews />
+        </>
     );
-}
+};
+
 export default Body;
+

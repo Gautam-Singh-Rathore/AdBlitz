@@ -1,9 +1,9 @@
 import React from "react";
 import Slider from "react-slick";
-import c1 from "../../assets/1.png";
-import c2 from "../../assets/2.png";
-import c3 from "../../assets/3.png";
-import c4 from "../../assets/4.png";
+import c1 from "../../../public/assets/1.png";
+import c2 from "../../../public/assets/2.png";
+import c3 from "../../../public/assets/3.png";
+import c4 from "../../../public/assets/4.png";
 
 function Carousel() {
   var settings = {
