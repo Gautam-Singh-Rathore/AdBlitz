@@ -29,28 +29,12 @@ const UserProvider = ({ children }) => {
     }
   };
 
-// ** This will be changed **
-  // const [cart, setCart] = useState([]);
-  // const getCartProduct = async () => {
-  //   try {
-  //     const q = query(collection(fireDB, "cart"), orderBy("time"));
 
-  //     const data = onSnapshot(q, (QuerySnapshot) => {
-  //       let productArray = [];
-  //       QuerySnapshot.forEach((doc) => {
-  //         productArray.push({ ...doc.data(), id: doc.id });
-  //       });
-  //       setCart(productArray);
-  //     });
-  //     return data;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   useEffect(() => {
     getAllProduct();
   }, []);
+
 
   return (
     <UserContext.Provider

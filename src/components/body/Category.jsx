@@ -1,7 +1,5 @@
 import { useNavigate } from "react-router-dom";
 
-
-
 // category
 const category = [
   {
@@ -48,11 +46,10 @@ const category = [
 ];
 
 const Category = () => {
-
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
-    <div >
+    <div>
       <div className="flex flex-col my-5 p-1">
         {/* main 1 */}
         <div className="flex overflow-x-scroll lg:justify-center  hide-scroll-bar">
@@ -61,9 +58,13 @@ const Category = () => {
             {/* category  */}
             {category.map((item, index) => {
               return (
-                <div key={index} className="px-3 lg:px-10" onClick={()=> navigate(`/category/${index}`)}>
+                <div
+                  key={index}
+                  className="px-3 lg:px-10"
+                  onClick={() => navigate(`/category/${index}`)}
+                >
                   {/* Image  */}
-                  <div className=" w-12 h-12 lg:w-16 lg:h-16 max-w-xs rounded-full  bg-slate-900 transition-all hover:bg-slate-700 cursor-pointer mb-1 ">
+                  <div className=" w-12 h-12 lg:w-16 lg:h-16 max-w-xs rounded-full transition-all bg-white hover:bg-blue-500  border-2 border-blue-500 cursor-pointer mb-1 mt-1 ">
                     <div className="flex justify-center mb-12">
                       {/* Image tag  */}
                       <img src={item.image} alt="img" />
@@ -71,7 +72,9 @@ const Category = () => {
                   </div>
 
                   {/* Name Text  */}
-                  <h1 className=" text-xs lg:text-[16px] text-center font-medium title-font first-letter:uppercase ">{item.name}</h1>
+                  <h1 className=" text-xs lg:text-[16px] text-center font-medium title-font first-letter:uppercase ">
+                    {item.name}
+                  </h1>
                 </div>
               );
             })}

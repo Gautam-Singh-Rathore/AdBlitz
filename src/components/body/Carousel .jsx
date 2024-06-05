@@ -13,6 +13,10 @@ function Carousel() {
     slidesToShow: 1,
     slidesToScroll: 1,
     initialSlide: 0,
+    autoplay: true,         // Enable autoplay
+    autoplaySpeed: 3000,    // Autoplay speed in milliseconds
+    pauseOnHover: true,     // Pause autoplay on hover
+    arrows: true,           // Show arrows for navigation
     responsive: [
       {
         breakpoint: 1024,
@@ -42,11 +46,11 @@ function Carousel() {
   };
   return (
     <div className="slider-container w-full h-[30vh] lg:h-[40vh] my-3 mb-7">
-      <Slider {...settings} className="h-full bg-[#FFCF09] ">
+      <Slider {...settings} className="h-full bg-[#FFCF09]">
         <div className="h-[30vh] lg:h-[40vh] w-full bg-[#F8FAC9]">
           <img src={c4} alt="" className="h-[30vh] lg:h-[40vh] m-auto" />
         </div>
-        <div className="h-[30vh] lg:h-[40vh] w-full bg-[#FC9304]">
+        <div className="h-[30vh] lg:h-[40vh] w-full bg-[#BFE3FA]">
           <img src={c1} alt="" className="h-[30vh] lg:h-[40vh] m-auto" />
         </div>
         <div className="h-[30vh] lg:h-[40vh] w-full">
@@ -61,3 +65,5 @@ function Carousel() {
 }
 
 export default Carousel;
+
+

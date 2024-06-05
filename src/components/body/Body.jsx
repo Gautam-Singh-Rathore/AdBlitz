@@ -24,13 +24,13 @@ const Body = () => {
     }, [city]);
 
     return (
-        <>
+        <div className='bg-[#F1F2F4]'>
             {!city && <CityPopup setCity={setCity} />}
             <Carousel />
             <Category />
             <HomePageCards />
             <Reviews />
-        </>
+        </div>
     );
 };
 
