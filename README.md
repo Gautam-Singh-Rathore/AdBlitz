@@ -14,7 +14,7 @@ To get a local copy of the project up and running, follow these simple steps:
     git clone <repository_url>
     ```
 
-2. **Navigate to the project directory:**
+2. **Navigate to the project directory:** 
 
     ```bash
     cd adblitz
